@@ -19,8 +19,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-
-    /* Vinicius */
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "strictNullChecks": true
