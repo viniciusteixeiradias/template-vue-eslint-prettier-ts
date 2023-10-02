@@ -1,0 +1,60 @@
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  extends: "plugin:vue/vue3-essential",
+  overrides: [
+    {
+      env: {
+        node: true,
+      },
+      files: [".eslintrc.{js,cjs}"],
+      parserOptions: {
+        sourceType: "script",
+      },
+    },
+  ],
+  parserOptions: {
+    ecmaVersion: "latest",
+    parser: "@typescript-eslint/parser",
+    sourceType: "module",
+  },
+  plugins: ["@typescript-eslint", "vue"],
+  rules: {},
+};
+
+
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  extends: [
+    "eslint:recommended",
+    "plugin:vue/base",
+    "plugin:vue/vue3-essential",
+    "plugin:vue/vue3-recommended",
+    "plugin:vue/vue3-strongly-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-type-checked",
+    "plugin:@typescript-eslint/strict-type-checked",
+    "plugin:@typescript-eslint/stylistic-type-checked",
+  ],
+  parser: "vue-eslint-parser",
+  root: true,
+  parserOptions: {
+    project: true,
+    sourceType: "module",
+    ecmaVersion: "latest",
+    tsconfigRootDir: __dirname,
+    extraFileExtensions: [".vue"],
+    parser: "@typescript-eslint/parser",
+  },
+  plugins: ["@typescript-eslint", "vue"],
+  rules: {
+    "logical-assignment-operators": "error",
+    "@typescript-eslint/prefer-as-const": "error",
+    "@typescript-eslint/await-thenable": "error",
+  },
+};
