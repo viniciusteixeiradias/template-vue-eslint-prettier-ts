@@ -1,12 +1,69 @@
 # Vue 3 / Typescript / Prettier / Eslint
 
+> [!NOTE]
+> The files defined below can and will probably have more settings, on this page I just put a summary of the settings that I considered important to make our formatter and linter run as expected.
+
 ![You shall not manually format code](image.png)
 
-- Prettier
+> [!NOTE]
+> To see the formatter and linter doing their job, follow the steps below:
+>
+> 1. Run: `npm run install`.
+> 2. Open the `App.vue` file in your text editor.
+> 3. Make any changes and save the file or you can run: `npm run format-and-lint`.
+
+## Files
+
+- extensions.json
 
 ```JSON
 {
-  /* default values v3.0.3 */
+  "recommendations": [
+    "Vue.volar",
+    "Vue.vscode-typescript-vue-plugin",
+    "tombonnike.vscode-status-bar-format-toggle",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint"
+  ]
+}
+
+```
+
+- settings.json
+
+```JSON
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.organizeImports": true
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
+```
+
+- Prettier
+
+> Note: Only the last line is a custom value, the others are standard in v3.0.3
+
+```JSON
+{
   "printWidth": 80,
   "tabWidth": 2,
   "useTabs": false,
@@ -22,7 +79,6 @@
   "endOfLine": "lf",
   "embeddedLanguageFormatting": "auto",
   "vueIndentScriptAndStyle": false,
-  /* custom values */
   "singleAttributePerLine": true
 }
 ```
@@ -81,14 +137,23 @@ indent_size = 2
 max_line_length = 80
 ```
 
+- package.json
+
+```JSON
+  "scripts": {
+    "lint": "eslint --ext .ts,.vue src --max-warnings 0 --report-unused-disable-directives",
+    "lint:fix": "npm run lint -- --fix",
+    "prettier": "npx prettier . --check",
+    "prettier:fix": "npx prettier . --write",
+    "format-and-lint": "npm run prettier:fix && npm run lint:fix"
+  },
+```
+
 - tsconfig.json
 
 ```JSON
 {
   "compilerOptions": {
-    // ...other settings
-
-    /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -105,49 +170,5 @@ max_line_length = 80
     "vite.config.ts",
     ".eslintrc.cjs"
   ]
-}
-```
-
-- extensions.json
-
-```JSON
-{
-  "recommendations": [
-    "Vue.volar",
-    "Vue.vscode-typescript-vue-plugin",
-    "tombonnike.vscode-status-bar-format-toggle",
-    "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint"
-  ]
-}
-
-```
-
-- settings.json
-
-```JSON
-{
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "source.organizeImports": true
-  },
-  "[vue]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
-  },
-  "editor.formatOnPaste": true,
-  "editor.formatOnSave": true,
-  "editor.formatOnType": true,
-  "eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
-  "typescript.tsdk": "node_modules/typescript/lib"
 }
 ```
